@@ -1,0 +1,46 @@
+[
+  {
+    "model": "hrapp.employee",
+    "pk": 1,
+    "fields": {
+      "first_name": "Davis",
+      "last_name": "Lindell",
+      "start_date": "2015-09-01",
+      "is_supervisor": false,
+      "department_id": 1
+    }
+  },
+  {
+    "model": "hrapp.employee",
+    "pk": 2,
+    "fields": {
+      "first_name": "Zane",
+      "last_name": "Bliss",
+      "start_date": "2015-09-01",
+      "is_supervisor": false,
+      "department_id": 2
+    }
+  },
+  {
+    "model": "hrapp.employee",
+    "pk": 3,
+    "fields": {
+      "first_name": "Stephen",
+      "last_name": "Castaneda",
+      "start_date": "2015-09-01",
+      "is_supervisor": false,
+      "department_id": 3
+    }
+  },
+  {
+    "model": "hrapp.employee",
+    "pk": 4,
+    "fields": {
+      "first_name": "Ronnie",
+      "last_name": "Lankford",
+      "start_date": "2015-09-01",
+      "is_supervisor": false,
+      "department_id": 4
+    }
+  }
+]

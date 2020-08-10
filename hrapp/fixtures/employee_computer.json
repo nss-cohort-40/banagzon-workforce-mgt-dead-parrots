@@ -1,0 +1,32 @@
+[
+  {
+    "model": "hrapp.employee_computer",
+    "pk": 1,
+    "fields": {
+      "empolyee_id": 1,
+      "computer_id": 1,
+      "assign_date": "2014-04-05",
+      "unassign_date": "2012-03-09"
+    }
+  },
+  {
+    "model": "hrapp.employee_computer",
+    "pk": 2,
+    "fields": {
+      "empolyee_id": 2,
+      "computer_id": 3,
+      "assign_date": "2014-04-05",
+      "unassign_date": "2012-03-09"
+    }
+  },
+  {
+    "model": "hrapp.employee_computer",
+    "pk": 3,
+    "fields": {
+      "empolyee_id": 3,
+      "computer_id": 4,
+      "assign_date": "2014-04-05",
+      "unassign_date": "2012-03-09"
+    }
+  }
+]
