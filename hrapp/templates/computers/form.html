@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+  {% block content %}
+   <h1>Computer Inventory Form</h1>
+    <form action="{% url 'hrapp:computer_form' %}" method="post">
+      {% csrf_token %}
+      <fieldset>
+          <label for="make">Computer Make/Model: </label>
+          <input id="make" type="text" name="make">
+      </fieldset>
+      <fieldset>
+          <label for="purchase_date">Purchase Date: </label>
+          <input id="purchase_date" type="date" name="purchase_date">
+      </fieldset>
+      <input id="decommission_date" type="hidden" name="decommission_date" value=NULL />
+      <input type="submit" value="Add It" />
+    </form>
+  {% endblock %}
