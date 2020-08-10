@@ -16,6 +16,7 @@ class Computer(models.Model):
     purchase_date = models.DateField()
     decommission_date = models.DateField(null=True, blank=True, default=None)
     employees = models.ManyToManyField("Employee", through='EmployeeComputer')
+    
 
     class Meta:
         verbose_name = ("Computer")
