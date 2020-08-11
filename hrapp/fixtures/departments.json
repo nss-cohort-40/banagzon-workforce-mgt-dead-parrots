@@ -1,0 +1,34 @@
+[
+  {
+    "model": "hrapp.department",
+    "pk": 1,
+    "fields": {
+      "dept_name": "Logistics",
+      "budget": 10001001.89
+    }
+  },
+  {
+    "model": "hrapp.department",
+    "pk": 2,
+    "fields": {
+      "dept_name": "Inventory",
+      "budget": 8454654.25
+    }
+  },
+  {
+    "model": "hrapp.department",
+    "pk": 3,
+    "fields": {
+      "dept_name": "Human Resources",
+      "budget": 151846.12
+    }
+  },
+  {
+    "model": "hrapp.department",
+    "pk": 4,
+    "fields": {
+      "dept_name": "Software Development",
+      "budget": 15644.21
+    }
+  }
+]
