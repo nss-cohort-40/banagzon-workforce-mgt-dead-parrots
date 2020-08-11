@@ -21,6 +21,7 @@
     {% if computer.decommission_date != None %}
       <h2>Decommission Date: {{ computer.decommission_date }}</h2>
     {% endif %}
+    <h3>Currently Assigned To: {{ computer.first_name }} {{ computer.last_name }}</h3>
     <button id="detail--{{ computer.id }}">Delete</button>
   </div>
   {% endblock %}

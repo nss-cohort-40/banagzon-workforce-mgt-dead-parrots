@@ -11,29 +11,13 @@ def get_employees():
 
         db_cursor.execute("""
         select
-          e.id
-          e.first_name
+          e.id,
+          e.first_name,
           e.last_name
         from hrapp_employee e
         """)
 
         return db_cursor.fetchall()  
-
-# def get_computers():
-#     with sqlite3.connect(Connection.db_path) as conn:
-#         conn.row_factory = sqlite3.Row
-#         db_cursor = conn.cursor()
-
-#         db_cursor.execute("""
-#         select
-#           c.id,
-#           c.make,
-#           c.purchase_date,
-#           c.decommission_date
-#         from hrapp_computer c
-#         """)
-
-#         return db_cursor.fetchall()
 
 @login_required
 def computer_form(request):
@@ -60,5 +44,16 @@ def computer_form(request):
             values (?, ?)
             """,
             (form_data['make'], form_data['purchase_date']))
+            
+            computer_id = db_cursor.lastrowid
+            
+            db_cursor.execute("""
+            insert into hrapp_employeecomputer
+            (
+              computer_id, employee_id
+            )
+            values (?, ?)
+            """,
+            (computer_id, form_data['employee']))
             
         return redirect(reverse('hrapp:computer_list'))
