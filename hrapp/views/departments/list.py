@@ -1,11 +1,11 @@
 import sqlite3
 from django.shortcuts import render
 from hrapp.models import Department
-
+from ..connection import Connection
 
 def department_list(request):
     if request.method == 'GET':
-        with sqlite3.connect("/Users/zanebliss/workspace/back-end/banagzon-workforce-mgt-dead-parrots/db.sqlite3") as conn:
+        with sqlite3.connect(Connection.db_path) as conn:
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
