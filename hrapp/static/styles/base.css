@@ -27,3 +27,12 @@ body {
   margin: 1em;
   padding: 1.5em;
 }
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+a {
+  text-decoration: none;
+}
