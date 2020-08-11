@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Training Programs</h1>
     {% if user.is_authenticated %}
-    <a href="{% url 'hrapp:training_program_form' %}"><button>Add Training Program</button></a>
+        <a href="{% url 'hrapp:training_program_form' %}"><button>Add Training Program</button></a>
     {% endif %}
 
     <ol>
