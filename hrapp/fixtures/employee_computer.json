@@ -1,6 +1,6 @@
 [
   {
-    "model": "hrapp.employee_computer",
+    "model": "hrapp.employeecomputer",
     "pk": 1,
     "fields": {
       "employee_id": 1,
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "hrapp.employee_computer",
+    "model": "hrapp.employeecomputer",
     "pk": 2,
     "fields": {
       "employee_id": 2,
@@ -20,7 +20,7 @@
     }
   },
   {
-    "model": "hrapp.employee_computer",
+    "model": "hrapp.employeecomputer",
     "pk": 3,
     "fields": {
       "employee_id": 3,
