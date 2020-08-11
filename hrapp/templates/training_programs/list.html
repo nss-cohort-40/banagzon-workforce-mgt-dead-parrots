@@ -1,13 +1,15 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Training Programs</h1>
+    <h1>Training Programs</h1>
 
-<ol>
-{% for program in all_training_programs %}
-    <li>
-        <a href="{% url 'hrapp:training_program_details' program.id%}"> {{ program.name }} </a>
-    </li>
-{% endfor %}
-</ol>
+    <a href="{% url 'hrapp:training_program_form' %}">Add Training Program</a>
+
+    <ol>
+    {% for program in all_training_programs %}
+        <li>
+            <a href="{% url 'hrapp:training_program_details' program.id%}"> {{ program.name }} </a>
+        </li>
+    {% endfor %}
+    </ol>
 {% endblock content %}
