@@ -9,7 +9,7 @@
 {% for employee in employees %}
     <li>
         <p>{{ employee }}</p>
-        Department: {{employee.computer}}
+        Department: {{ employee.department.dept_name}}
     </li>
 {% endfor %}
 </ol>
