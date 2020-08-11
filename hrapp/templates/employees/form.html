@@ -21,22 +21,13 @@
       </fieldset>
       <fieldset>
           <label for="start_date">Start Date: </label>
-          <input id="start_date" type="number" name="start_date">
+          <input id="start_date" type="date" name="start_date">
       </fieldset>
       <fieldset>
           <label for="supervisor">Supervisor: </label>
           <input id="supervisor" type="text" name="supervisor">
       </fieldset>
-      <fieldset>
-          <label for="location">Library: </label>
-          <select id="location" type="text" name="location">
-                {% for library in all_libraries %}
-                    <option value="{{ library.id }}">{{ library.title }}</option>
-                {% endfor %}
-          </select>
-      </fieldset>
-
-      <input type="submit" value="Add It" />
+      <input type="submit" value="Add Employee" />
     </form>
   </body>
 </html>
