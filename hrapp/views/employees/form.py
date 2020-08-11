@@ -9,7 +9,6 @@ def get_employees():
             conn.row_factory = sqlite3.Row
             db_cursor = conn.cursor()
 
-            # TODO: Add to query: e.department,
             db_cursor.execute("""
             select
                 e.id,
@@ -17,6 +16,7 @@ def get_employees():
                 e.last_name,
                 e.start_date,
                 e.is_supervisor
+                e.department
             from hrapp_employee e
             """)
 
