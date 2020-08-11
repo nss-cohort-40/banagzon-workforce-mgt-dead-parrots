@@ -7,7 +7,7 @@
     <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="actual_method" value="DELETE">
-      <button>Yes is my Final Answer</button>
+      <button>Yes, this is my Final Answer</button>
     </form>
     <form action="{% url 'hrapp:computer_list' %}" method="GET">
       {% csrf_token %}
@@ -17,7 +17,7 @@
 
   <div class="detail_computers">
     <h1>Make / Model: {{ computer.make }}</h1>
-    <h2>Purchase Date:{{ computer.purchase_date }}</h2>
+    <h2>Purchase Date: {{ computer.purchase_date }}</h2>
     {% if computer.decommission_date != None %}
       <h2>Decommission Date: {{ computer.decommission_date }}</h2>
     {% endif %}
