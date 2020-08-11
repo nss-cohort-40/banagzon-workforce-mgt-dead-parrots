@@ -1,0 +1,13 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+<h1>Training Programs</h1>
+
+<ol>
+{% for program in all_training_programs %}
+    <li>
+        <a href="{% url 'hrapp:training_program_details' program.id%}"> {{ program.name }} </a>
+    </li>
+{% endfor %}
+</ol>
+{% endblock content %}
