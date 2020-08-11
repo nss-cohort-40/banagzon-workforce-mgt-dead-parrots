@@ -2,7 +2,6 @@ import sqlite3
 from django.shortcuts import render
 from hrapp.models import Employee
 
-
 def employee_list(request):
     if request.method == 'GET':
         with sqlite3.connect("/Users/joeshep/workspace/python/bangazon-workforce-boilerplate/bangazonworkforcemgt/db.sqlite3") as conn:
@@ -34,7 +33,7 @@ def employee_list(request):
 
                 all_employees.append(employee)
 
-    template = 'employees/employees_list.html'
+    template = 'employees/list.html'
     context = {
         'employees': all_employees
     }
