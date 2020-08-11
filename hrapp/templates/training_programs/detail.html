@@ -1,9 +1,14 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<h1>Training Program</h1>
-<p>Name: {{ training_program.name }}</p>
-<p>Description: {{training_program.description}}</p>
-<p>Start Date: {{training_program.start_date}}</p>
-<p>End Date: {{training_program.end_date}}</p>
+  <h1>Training Program</h1>
+  <p>Name: {{ training_program.name }}</p>
+  <p>Description: {{training_program.description}}</p>
+  <p>Start Date: {{training_program.start_date}}</p>
+  <p>End Date: {{training_program.end_date}}</p>
+
+  {% for employee in training_program %}
+          <p>{{employee.first_name}} {{employee.last_name}}</p>
+  {% endfor %}
+
 {% endblock content %}
