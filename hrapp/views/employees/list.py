@@ -55,5 +55,5 @@ def employee_list(request):
             """,
             (form_data['first_name'], form_data['last_name'],
             form_data['start_date']))
-        return redirect(reverse('hrapp:employees'))
+        return redirect(reverse('hrapp:employee_list'))
             

@@ -9,7 +9,7 @@
     <h1>Add Employee</h1>
 
 
-    <form action="{% url 'hrapp:employees' %}" method="post">
+    <form action="{% url 'hrapp:employee_list' %}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="first_name">First Name: </label>
@@ -22,10 +22,6 @@
       <fieldset>
           <label for="start_date">Start Date: </label>
           <input id="start_date" type="date" name="start_date">
-      </fieldset>
-      <fieldset>
-          <label for="is_supervisor">Supervisor: </label>
-          <input id="is_supervisor" type="text" name="is_supervisor">
       </fieldset>
       <input type="submit" value="Add Employee" />
     </form>

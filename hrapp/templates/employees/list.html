@@ -3,11 +3,13 @@
 {% block content %}
 <h1>Employees</h1>
 
+<button><a href="{% url 'hrapp:employee_form' %}">Add Employee</a></button>
+
 <ol>
 {% for employee in employees %}
     <li>
         <p>{{ employee }}</p>
-        Current computer: {{employee.computer}}
+        Department: {{employee.computer}}
     </li>
 {% endfor %}
 </ol>
