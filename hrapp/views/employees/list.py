@@ -39,6 +39,8 @@ def employee_list(request):
         context = {
             'employees': all_employees
         }
+        return render(request, template, context)
+
     elif request.method == 'POST':
         form_data = request.POST
         with sqlite3.connect(Connection.db_path) as conn:
@@ -49,10 +51,9 @@ def employee_list(request):
                 first_name, last_name, 
                 start_date, is_supervisor
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, 0)
             """,
             (form_data['first_name'], form_data['last_name'],
-            form_data['start_date'], form_data['is_supervisor']))
-            return redirect(reverse('hrapp:employee'))
-        return render(request, template, context)
+            form_data['start_date']))
+        return redirect(reverse('hrapp:employees'))
             
