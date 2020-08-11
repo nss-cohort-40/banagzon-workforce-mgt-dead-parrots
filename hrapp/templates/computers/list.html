@@ -1,10 +1,18 @@
 {% extends 'shared/base.html' %}
-  {% block content %}
-    <h1>Computers</h1>
+{% load static %}
 
-    <ol>
+{% block css %}
+    <link rel="stylesheet" href="{% static 'styles/base.css' %}" />
+{% endblock %}
+
+  {% block content %}
+    <div class="computer_header">
+      <h1>Computers</h1>
+      <a href="{% url 'hrapp:computer_form' %}"><button>Add New Computer</button></a>
+    </div> 
+    <ol class="computers">
     {% for computer in all_computers %}
-        <li>
+        <li class="computer">
             <a href="{% url 'hrapp:computer' computer.id %}">{{ computer.make }}</a>
         </li>
     {% endfor %}
