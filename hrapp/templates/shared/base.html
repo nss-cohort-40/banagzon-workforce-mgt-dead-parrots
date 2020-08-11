@@ -14,9 +14,21 @@
 
 <body>
 
+    <nav>
+        <ul>
+            <li><a href="{% url 'hrapp:employee_list' %}">Employees</a></li>
+            <li><a href="{% url 'hrapp:department_list' %}">Departments</a></li>    
+            <li><a href="{% url 'hrapp:computer_list' %}">Computers</a></li>    
+            <li><a href="{% url 'hrapp:training_programs' %}">Training Programs</a></li>   
+            {% if not user.is_authenticated %}
+            <li><a href="{% url 'hrapp:login' %}">Login</a> 
+            {% else %}
+            <li><a href="{% url 'hrapp:logout' %}">Logout</a></li>    
+            {% endif %}
+        </ul>
+    </nav>
     {% block content %}
     {% endblock %}
-
     {% block scripts %}
     {% endblock scripts %}
 
