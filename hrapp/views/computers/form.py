@@ -39,10 +39,10 @@ def computer_form(request):
             db_cursor.execute("""
             insert into hrapp_computer
             (
-              make, purchase_date, decommission_date
+              make, purchase_date
             )
-            values (?, ?, ?)
+            values (?, ?)
             """,
-            (form_data['make'], form_data['purchase_date'], form_data['decommission_date']))
+            (form_data['make'], form_data['purchase_date']))
             
         return redirect(reverse('hrapp:computer_list'))
