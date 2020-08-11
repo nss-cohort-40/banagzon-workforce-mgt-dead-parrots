@@ -1,0 +1,31 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+  {% block content %}
+
+  <dialog class="infoDialog">
+    <div class="infoDialog__message"></div>
+    <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="actual_method" value="DELETE">
+      <button>Yes</button>
+    </form>
+    <form action="{% url 'hrapp:computer_list' %}" method="GET">
+      {% csrf_token %}
+      <button type="submit">No</button>
+    </form>
+  </dialog>
+
+  <div class="computers">
+    <h1>Make: {{ computer.make }}</h1>
+    <h2>Purchase Date:{{ computer.purchase_date }}</h2>
+    {% if computer.decommission_date != "NULL" %}
+      <h2>Decommission Date: {{ computer.decommission_date }}</h2>
+    {% endif %}
+    <button id="detail--{{ computer.id }}">Delete</button>
+  </div>
+  {% endblock %}
+  
+
+{% block scripts %}
+    <script src="{% static 'scripts/computers.js' %}"></script>
+{% endblock %}
