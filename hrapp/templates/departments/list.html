@@ -1,0 +1,16 @@
+{% extends 'shared/base.html'%}
+
+{% block content %}
+    <h1>Departments</h1>
+    <ul>
+    {% for department in departments %}
+        <li>
+            <h2>{{ department }}</h2>
+            <p>Budget ${{ department.budget }}</p>
+            {% comment %} TODO: Add employees {% endcomment %}
+            <p>Number of employees: </p>
+        </li>
+    {% endfor %}
+    </ul>
+        
+{% endblock %}
