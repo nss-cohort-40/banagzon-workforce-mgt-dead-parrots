@@ -9,3 +9,4 @@ from .training_programs.detail import training_program_details
 from .computers.list import computer_list
 from .computers.form import computer_form
 from .computers.details import computer_details
+from .employees.details import employee_details
