@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Training Program Form</h1>
 
- <form action="{% url 'hrapp:training_programs_list' %}" method="post">
+ <form action="{% url 'hrapp:training_programs' %}" method="post">
       {% csrf_token %}
       <fieldset>
           <label for="name">Name: </label>
