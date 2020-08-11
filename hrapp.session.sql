@@ -18,9 +18,6 @@ INSERT INTO hrapp_training_program
 VALUES
 ('New thing', 'Come learn this new thing, dawg!', '2021-03-09', '2023-04-05', 10);
 
-DELETE FROM hrapp_training_program
-WHERE name LIKE '%OSHA%';
-
 INSERT INTO hrapp_employee_training_program
 (training_program_id, employee_id)
 VALUES
