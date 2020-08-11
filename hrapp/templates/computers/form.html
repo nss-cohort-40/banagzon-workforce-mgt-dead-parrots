@@ -11,6 +11,15 @@
           <label for="purchase_date">Purchase Date: </label>
           <input id="purchase_date" type="date" name="purchase_date">
       </fieldset>
+      <fieldset>
+        <label for="employee">Employee: </label>
+        <select id="employee" type="text" name="employee">
+          {% for employee in all_employees %}
+            <option {% if employee.id == book.location_id %}selected{% endif %} value="{{ employee.id }}">
+              {{ employee.first_name }} {{ employee.last_name }}</option>
+          {% endfor %}
+        </select>
+      </fieldset>
       <input type="submit" value="Add Computer" />
     </form>
   {% endblock %}
