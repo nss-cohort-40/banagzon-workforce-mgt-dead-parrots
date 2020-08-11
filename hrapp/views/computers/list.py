@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from hrapp.models import Computer
 from ..connection import Connection
 
-@login_required
+
 def computer_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
