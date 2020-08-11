@@ -15,6 +15,32 @@ body {
   justify-content: space-around;
 }
 
+/* computer styles */
+
+.computer_header {
+  text-align: center;
+}
+
+.computers {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.computer {
+  flex-basis: 20%;
+  padding: 0 2em 0.5em 2em;
+  border: 1px solid gray;
+  margin: 1em;
+  padding: 1.5em;
+}
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+
 a {
   text-decoration: none;
 }

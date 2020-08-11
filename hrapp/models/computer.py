@@ -4,11 +4,10 @@ from django.shortcuts import reverse
 class Computer(models.Model):
     '''
     description: This class creates a computer and its properties
-    author: Joe Shep
     properties:
       make: The make will contain the name of the brand of the computer.
       purchase_date: This property contains the purchase date in string form.
-      decomission_date: This property contains the dicomission date in string form.
+      decomission_date: This property contains the decomission date in string form.
       employees: This property contains the many to many relationship with the computer/employee model
     '''
 
