@@ -7,11 +7,11 @@
     <form action="{% url 'hrapp:computer' computer.id %}" method="POST">
       {% csrf_token %}
       <input type="hidden" name="actual_method" value="DELETE">
-      <button>Yes</button>
+      <button>Yes is my Final Answer</button>
     </form>
     <form action="{% url 'hrapp:computer_list' %}" method="GET">
       {% csrf_token %}
-      <button type="submit">No</button>
+      <button type="submit">Please No!</button>
     </form>
   </dialog>
 
