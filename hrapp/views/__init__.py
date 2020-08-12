@@ -1,6 +1,7 @@
 from .employees.list import employee_list
 from .employees.form import employee_form
 from .departments import department_list
+from .departments import department_form
 from .home import home
 from .auth.logout import logout_user
 from .training_programs.list import training_program_list

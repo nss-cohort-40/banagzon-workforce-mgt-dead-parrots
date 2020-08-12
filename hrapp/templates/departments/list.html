@@ -2,13 +2,15 @@
 
 {% block content %}
     <h1>Departments</h1>
+    {% if user.is_authenticated %}
+    <a href="{% url 'hrapp:department_form' %}"><button>Create department</button></a>
+    {% endif %}
     <ul>
     {% for department in departments %}
         <li>
             <h2>{{ department }}</h2>
             <p>Budget ${{ department.budget }}</p>
-            {% comment %} TODO: Add employees {% endcomment %}
-            <p>Number of employees: </p>
+            <p>Number of employees: {{ department.num_employees }}</p>
         </li>
     {% endfor %}
     </ul>
