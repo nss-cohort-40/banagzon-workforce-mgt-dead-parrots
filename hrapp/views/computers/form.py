@@ -47,13 +47,15 @@ def computer_form(request):
             
             computer_id = db_cursor.lastrowid
             
-            db_cursor.execute("""
-            insert into hrapp_employeecomputer
-            (
-              computer_id, employee_id
-            )
-            values (?, ?)
-            """,
-            (computer_id, form_data['employee']))
+            if form_data['employee'] != "NULL":
+
+                db_cursor.execute("""
+                insert into hrapp_employeecomputer
+                (
+                  computer_id, employee_id
+                )
+                values (?, ?)
+                """,
+                (computer_id, form_data['employee']))
             
         return redirect(reverse('hrapp:computer_list'))
