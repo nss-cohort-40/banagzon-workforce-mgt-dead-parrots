@@ -28,13 +28,13 @@ def create_employee(cursor, row):
     computer.id = _row['computer_id']
     employee.computer = computer
 
-    training_program_list = []
+    employee.training_programs = []
+
     training_program = Training_program()
-    if training_program.id != None:
-        training_program.name = _row['training_program_name']
-        training_program.id = _row['training_program_id']
-        employee.training_program = training_program
-        training_program_list.append(training_program)
+    training_program.name = _row['training_program_name']
+    training_program.id = _row['training_program_id']
+    employee.training_program = training_program
+    
     return employee
 
 
@@ -75,7 +75,17 @@ def get_employee(employee_id):
             WHERE e.id = ?;
             """, (employee_id,))
 
-        return db_cursor.fetchone()
+    employees = db_cursor.fetchone()
+
+    employee_list = {}
+
+    for (employee, training_program) in employees:
+        if employee.id not in employees:
+            employee_list[employee.id] = employee
+            employee_list[employee.id].training_programs.append(training_program)
+
+        else:
+            employee_list[employee.id].training_programs.append(training_program)
 
 
 def get_departments():
