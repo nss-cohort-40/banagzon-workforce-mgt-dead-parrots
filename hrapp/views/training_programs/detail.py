@@ -45,6 +45,7 @@ def get_training_program(training_program_id):
 
         return db_cursor.fetchone()
 
+
 def training_program_details(request, training_program_id):
     if request.method == 'GET':
         training_program = get_training_program(training_program_id)
@@ -100,20 +101,6 @@ def training_program_details(request, training_program_id):
 
             return redirect(reverse('hrapp:training_programs'))
 
-        # if (
-        #     "actual_method" in form_data
-        #     and form_data["actual_method"] == "DELETE-EMPLOYEE"
-        # ):
-        #     with sqlite3.connect(Connection.db_path) as conn:
-        #         db_cursor = conn.cursor()
-
-        #         db_cursor.execute("""
-        #         DELETE FROM hrapp_employee_training_program
-        #         WHERE employee_id = ?
-        #         """, (training_program_id,))
-
-        #     return redirect(reverse('hrapp:training_programs'))
-
 def employee_training_program_details(request, training_program_id, employee_id):
     form_data = request.POST
     if (
@@ -127,7 +114,7 @@ def employee_training_program_details(request, training_program_id, employee_id)
                 db_cursor.execute("""
                 DELETE FROM hrapp_employee_training_program
                 WHERE employee_id = ?
-                """, (training_program_id,))
+                """, (employee_id,))
 
             training_program = get_training_program(training_program_id)
             program_employees = get_employees_attending(training_program_id)

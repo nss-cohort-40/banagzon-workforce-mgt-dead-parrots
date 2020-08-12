@@ -10,7 +10,7 @@
   <p>End Date: {{training_program.end_date}}</p>
   <p>Max Attendees: {{training_program.max_attendees}}</p>
 
-  {% if program_hasnt_started %}
+  {% if program_hasnt_started and user.is_authenticated %}
   <section>
     <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
         {% csrf_token %}
@@ -25,16 +25,20 @@
   {% endif %}
 
   <h3>Current Employees Attending:</h3>
+
   {% if not program_employees %}
   <p>Nobody has signed up yet!</p>
   {% endif %}
+
   {% for employee in program_employees %}
   <div class="employee_training_program">{{employee.first_name}} {{employee.last_name}}
-    <form action="{% url 'hrapp:employee_training_program' training_program.id employee.id %}" method="POST">
-      {% csrf_token %}
-      <input type="hidden" name="actual_method" value="DELETE-EMPLOYEE">
-      <button>X</button>
-    </form>
+    {% if user.is_authenticated %}
+      <form action="{% url 'hrapp:employee_training_program' training_program.id employee.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="actual_method" value="DELETE-EMPLOYEE">
+        <button>X</button>
+      </form>
+    {% endif %}
   </div>
   {% endfor %}
 

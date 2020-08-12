@@ -62,4 +62,4 @@ def training_program_list(request):
             VALUES (?, ?, ?, ?, ?)
             """, (form_data['name'], form_data['description'], form_data['start_date'], form_data['end_date'], form_data['max_attendees']))
 
-        # return redirect(reverse('hrapp:training_programs'))
+        return redirect(reverse('hrapp:training_programs'))
