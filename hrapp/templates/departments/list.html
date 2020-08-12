@@ -8,7 +8,7 @@
     <ul>
     {% for department in departments %}
         <li>
-            <h2>{{ department.dept_name }}</h2>
+            <h2><a href="{% url 'hrapp:department' department.id %}">{{ department.dept_name }}</a></h2>
             <p>Budget ${{ department.budget }}</p>
             <p>Number of employees: {{ department.employees|length }}</p>
         </li>
