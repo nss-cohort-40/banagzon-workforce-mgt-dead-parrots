@@ -8,9 +8,9 @@
     <ul>
     {% for department in departments %}
         <li>
-            <h2>{{ department }}</h2>
+            <h2>{{ department.dept_name }}</h2>
             <p>Budget ${{ department.budget }}</p>
-            <p>Number of employees: {{ department.num_employees }}</p>
+            <p>Number of employees: {{ department.employees|length }}</p>
         </li>
     {% endfor %}
     </ul>
