@@ -28,10 +28,13 @@ def create_employee(cursor, row):
     computer.id = _row['computer_id']
     employee.computer = computer
 
+    training_program_list = []
     training_program = Training_program()
-    training_program.name = _row['training_program_name']
-    training_program.id = _row['training_program_id']
-    employee.training_program = training_program
+    if training_program.id != None:
+        training_program.name = _row['training_program_name']
+        training_program.id = _row['training_program_id']
+        employee.training_program = training_program
+        training_program_list.append(training_program)
     return employee
 
 
