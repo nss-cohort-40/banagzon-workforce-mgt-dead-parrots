@@ -3,40 +3,44 @@
     "model": "hrapp.training_program",
     "pk": 1,
     "fields": {
-      "title": "OSHA Regulations",
-      "start_date": "2012-03-09",
-      "end_date": "2014-04-05",
-      "capacity": 25
+      "name": "OSHA Regulations",
+      "description": "Learn what and what not to do",
+      "start_date": "2021-03-09",
+      "end_date": "2022-04-05",
+      "max_attendees": 25
     }
   },
   {
     "model": "hrapp.training_program",
     "pk": 2,
     "fields": {
-      "title": "Coloring by Numbers",
-      "start_date": "2012-03-09",
-      "end_date": "2014-04-05",
-      "capacity": 10
+      "name": "Coloring by Numbers",
+      "description": "Learn how to paint with children",
+      "start_date": "2021-03-09",
+      "end_date": "2022-04-05",
+      "max_attendees": 10
     }
   },
   {
     "model": "hrapp.training_program",
     "pk": 3,
     "fields": {
-      "title": "Forklift Maintance",
-      "start_date": "2012-03-09",
-      "end_date": "2014-04-05",
-      "capacity": 15
+      "name": "Forklift Maintance",
+      "description": "Learn to drive forwards and backwards",
+      "start_date": "2021-03-09",
+      "end_date": "2022-04-05",
+      "max_attendees": 15
     }
   },
   {
     "model": "hrapp.training_program",
     "pk": 4,
     "fields": {
-      "title": "Inventory Management",
-      "start_date": "2012-03-09",
-      "end_date": "2014-04-05",
-      "capacity": 17
+      "name": "Inventory Management",
+      "description": "Learn to count things correctly",
+      "start_date": "2021-03-09",
+      "end_date": "2022-04-05",
+      "max_attendees": 17
     }
   }
 ]

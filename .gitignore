@@ -34,5 +34,4 @@ migrations
 
 #db location
 hrapp/views/connection.py
-
 bangazon.session.sql
