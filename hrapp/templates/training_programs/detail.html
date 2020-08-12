@@ -1,14 +1,42 @@
 {% extends 'shared/base.html' %}
 
+{% load static %}
+
 {% block content %}
   <h1>Training Program</h1>
   <p>Name: {{ training_program.name }}</p>
   <p>Description: {{training_program.description}}</p>
   <p>Start Date: {{training_program.start_date}}</p>
   <p>End Date: {{training_program.end_date}}</p>
+  <p>Max Attendees: {{training_program.max_attendees}}</p>
 
-  {% for employee in training_program %}
-          <p>{{employee.first_name}} {{employee.last_name}}</p>
+  {% if program_hasnt_started %}
+  <section>
+    <form action="{% url 'hrapp:training_program' training_program.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="actual_method" value="DELETE-PROGRAM">
+        <button>Delete</button>
+    </form>
+    <form action="{% url 'hrapp:training_program_edit_form' training_program.id %}" method="GET">
+        {% csrf_token %}
+        <button>Edit</button>
+    </form>
+  </section>
+  {% endif %}
+
+  <h3>Current Employees Attending:</h3>
+  {% if not program_employees %}
+  <p>Nobody has signed up yet!</p>
+  {% endif %}
+  {% for employee in program_employees %}
+  <div class="employee_training_program">{{employee.first_name}} {{employee.last_name}}
+    <form action="{% url 'hrapp:employee_training_program' training_program.id employee.id %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="actual_method" value="DELETE-EMPLOYEE">
+      <button>X</button>
+    </form>
+  </div>
   {% endfor %}
 
+  
 {% endblock content %}

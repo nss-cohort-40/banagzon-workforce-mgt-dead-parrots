@@ -1,16 +1,18 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-    <h1>Training Programs</h1>
-    {% if user.is_authenticated %}
-        <a href="{% url 'hrapp:training_program_form' %}"><button>Add Training Program</button></a>
-    {% endif %}
+    <div>
+        <h1>Training Programs</h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'hrapp:training_program_form' %}"><button>Add Training Program</button></a>
+        {% endif %}
 
-    <ol>
-    {% for program in all_training_programs %}
-        <li>
-            <a href="{% url 'hrapp:training_program_details' program.id%}"> {{ program.name }} </a>
-        </li>
-    {% endfor %}
-    </ol>
+        <ol>
+        {% for program in all_training_programs %}
+            <li>
+                <a href="{% url 'hrapp:training_program' program.id%}"> {{ program.name }} </a>
+            </li>
+        {% endfor %}
+        </ol>
+    </div>
 {% endblock content %}
