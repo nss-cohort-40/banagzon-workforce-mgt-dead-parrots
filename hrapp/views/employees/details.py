@@ -33,9 +33,9 @@ def create_employee(cursor, row):
     training_program = Training_program()
     training_program.name = _row['training_program_name']
     training_program.id = _row['training_program_id']
-    employee.training_program = training_program
+    # employee.training_program = training_program
     
-    return employee
+    return (employee, training_program)
 
 
 def get_employee(employee_id):
@@ -75,17 +75,20 @@ def get_employee(employee_id):
             WHERE e.id = ?;
             """, (employee_id,))
 
-    employees = db_cursor.fetchone()
+    return db_cursor.fetchone()
+    # all_employees = db_cursor.fetchall()
+    # employee_groups = {}
 
-    employee_list = {}
 
-    for (employee, training_program) in employees:
-        if employee.id not in employees:
-            employee_list[employee.id] = employee
-            employee_list[employee.id].training_programs.append(training_program)
+    # for (employee) in all_employees:
+    #     if employee_id not in employee_groups:
+    #         employee_groups[employee.id] = employee
+    #         employee_groups[employee.id].training_programs.append(employee)
 
-        else:
-            employee_list[employee.id].training_programs.append(training_program)
+    #     else:
+    #         employee_groups[employee.id].training_programs.append(employee)
+
+    #     return employee_groups[employee.id]
 
 
 def get_departments():
@@ -107,15 +110,44 @@ def get_departments():
 
     # def get_employee_training_program():
 
+def get_training_programs(employee_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        SELECT
+    e.id employee_id,
+    e.first_name,
+    e.last_name,
+    e.is_supervisor,
+    e.department_id,
+    tp.name as training_program_name,
+    tp.start_date as training_program_start,
+    tp.end_date as training_program_end,
+    etp.id as employeetrainingprogram_id,
+    tp.id as training_program_id
+    from hrapp_employee e 
+    LEFT JOIN hrapp_employee_training_program etp ON
+    e.id = etp.employee_id
+    LEFT JOIN hrapp_training_program tp ON
+    tp.id = etp.training_program_id
+    WHERE e.id = ?
+    """, (employee_id,))
+
+    return db_cursor.fetchone()
 
 @login_required
 def employee_details(request, employee_id):
     if request.method == 'GET':
+        # employee = get_employee(employee_id)
         employee = get_employee(employee_id)
+        training_program = get_training_programs(employee_id)
 
         template = 'employees/detail.html'
         context = {
-            'employee': employee
+            'employee': employee,
+            'training_program': training_program
         }
 
         return render(request, template, context)
