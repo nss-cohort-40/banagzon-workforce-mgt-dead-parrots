@@ -14,4 +14,10 @@
     {% if user.is_authenticated %}
     {% comment %} <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button> {% endcomment %}
     {% endif %}
+
+  <form action="{% url 'hrapp:employee' employee.id %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="actual_method" value="DELETE">
+    <button>Delete</button>
+  </form>
 {% endblock %}
