@@ -1,6 +1,8 @@
 from .employees.list import employee_list
 from .employees.form import employee_form
 from .departments import department_list
+from .departments import department_form
+from .departments import department_details
 from .home import home
 from .auth.logout import logout_user
 from .training_programs.list import training_program_list
@@ -10,5 +12,6 @@ from .training_programs.detail import employee_training_program_details
 from .computers.list import computer_list
 from .computers.form import computer_form
 from .computers.details import computer_details
+from .employees.details import employee_details
 from .training_programs.form import training_program_edit_form
 from .training_programs.form import employee_program_form

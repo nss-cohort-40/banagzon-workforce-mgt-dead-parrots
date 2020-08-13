@@ -1,0 +1,17 @@
+{% extends 'shared/base.html' %}
+{% block content %}
+    <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
+    <h2>Department: {{ employee.department.dept_name }}</h2>
+    {% if employee.computer.make != None %}
+    <p>Computer: {{ employee.computer.make }} </p>
+    {% endif %}
+    {% if employee.training_programs != None %}
+    <h2> Training Programs</h2>
+    {% for tp in employee.training_programs %}
+    <p>{{ tp.name }} </p>
+    {% endfor %}
+    {% endif %}
+    {% if user.is_authenticated %}
+    {% comment %} <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button> {% endcomment %}
+    {% endif %}
+{% endblock %}

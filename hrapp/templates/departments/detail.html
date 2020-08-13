@@ -1,0 +1,15 @@
+{% extends 'shared/base.html' %}
+
+{% block content %}
+    <h1>{{ department }}</h1>
+    <h2>Employees</h2>
+    {% for employee in department.employees %}
+        <h4>Name: {{ employee }}</h4>
+        <p>Start date: {{ employee.start_date }}</p>
+        {% if employee.is_supervisor == 1 %}
+        <p>Supervisor: Yes</p>
+        {% else %}
+        <p>Supervisor: No</p>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

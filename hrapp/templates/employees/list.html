@@ -3,12 +3,13 @@
 {% block content %}
 <h1>Employees</h1>
 
+{% if user.is_authenticated %}
 <button><a href="{% url 'hrapp:employee_form' %}">Add Employee</a></button>
-
+{% endif %}
 <ol>
 {% for employee in employees %}
     <li>
-        <p>{{ employee }}</p>
+        <p><a href="{% url 'hrapp:employee' employee.id %}"> {{ employee }}</a></p>
         Department: {{ employee.department.dept_name}}
         <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button>
     </li>
