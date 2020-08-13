@@ -8,9 +8,17 @@
     <ul>
     {% for department in departments %}
         <li>
-            <h2><a href="{% url 'hrapp:department' department.id %}">{{ department.dept_name }}</a></h2>
+            <h2>
+            {% if department.employees.0.first_name %}
+            <a href="{% url 'hrapp:department' department.id %}">{{ department.dept_name }}</a>
+            {% else %}
+            {{ department.dept_name }}
+            {% endif %}
+            </h2>
             <p>Budget ${{ department.budget }}</p>
+            {% if department.employees.0.first_name %}
             <p>Number of employees: {{ department.employees|length }}</p>
+            {% endif %}
         </li>
     {% endfor %}
     </ul>

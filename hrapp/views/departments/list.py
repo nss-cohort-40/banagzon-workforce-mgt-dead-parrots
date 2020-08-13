@@ -39,7 +39,7 @@ def department_list(request):
                 e.is_supervisor,
                 e.start_date
             from hrapp_department d
-            join hrapp_employee e on d.id = e.department_id;
+            left join hrapp_employee e on d.id = e.department_id;
             """)
 
             all_departments = db_cursor.fetchall()
