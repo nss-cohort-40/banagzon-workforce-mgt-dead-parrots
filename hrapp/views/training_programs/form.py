@@ -100,14 +100,3 @@ def employee_program_form(request, employee_id):
             }
 
             return render(request, template, context)
-
-
-def create_programs_emp_not_in(cursor, row):
-    _row = sqlite3.Row(cursor, row)
-
-    training_program = Training_program()
-    training_program.id = _row["id"]
-    training_program.name = _row["name"]
-    training_program.employee_id = _row["employee_id"]
-
-    return training_program
