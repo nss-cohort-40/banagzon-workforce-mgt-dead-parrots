@@ -39,6 +39,21 @@ def get_departments():
 
         return db_cursor.fetchall()
 
+def get_computers():
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+         select
+          c.id,
+          c.make,
+          c.purchase_date,
+          c.decommission_date,
+        from hrapp_computer c
+        """)
+
+        return db_cursor.fetchall()
 
 @login_required
 def employee_form(request):
@@ -50,3 +65,21 @@ def employee_form(request):
     }
 
     return render(request, template, context)
+
+@login_required
+def employee_edit_form(request, employee_id):
+
+    if request.method == 'GET':
+        employee = get_employees(employee_id)
+        department = get_departments()
+        computer = get_computers()
+
+        template = 'employees/form.html'
+        context = {
+            'employee': employee,
+            'department': department,
+            'computer': computer,
+            'all_employees': employee
+        }
+
+        return render(request, template, context)

@@ -6,10 +6,13 @@
     <title>Workforce</title>
   </head>
   <body>
-    <h1>Add Employee</h1>
+    <h1>Employee Inventory</h1>
 
-
+    {% if employee.id is not None %}
+      <form action="{% url 'hrapp:employee' employee.id %}" method="post">
+    {% else %}
     <form action="{% url 'hrapp:employee_list' %}" method="post">
+    {% endif %}
       {% csrf_token %}
       <fieldset>
           <label for="first_name">First Name: </label>
@@ -32,7 +35,9 @@
                 {% endfor %}
           </select>
       </fieldset>
+      {% if employee.id is not None %}
       <input type="submit" value="Add Employee" />
+      
     </form>
   </body>
 </html>
