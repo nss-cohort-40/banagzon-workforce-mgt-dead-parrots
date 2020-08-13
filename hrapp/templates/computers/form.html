@@ -16,8 +16,9 @@
         <select id="employee" type="text" name="employee">
           <option value="NULL"></option>
           {% for employee in all_employees %}
-            <option {% if employee.id == computer.employee.id %}selected{% endif %} value="{{ employee.id }}">
-              {{ employee.first_name }} {{ employee.last_name }}</option>
+            {% if employee.empcomp_id == None %}
+              <option value="{{ employee.id }}">{{ employee.first_name }} {{ employee.last_name }}</option>
+            {% endif %}
           {% endfor %}
         </select>
       </fieldset>
