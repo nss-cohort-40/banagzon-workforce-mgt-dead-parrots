@@ -16,5 +16,8 @@
     <p>Training Program: {{ tp.name }} </p>
     {% endfor %}
     {% endif %}
+    {% if user.is_authenticated %}
+    {% comment %} <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button> {% endcomment %}
+    {% endif %}
   </body>
 </html>
