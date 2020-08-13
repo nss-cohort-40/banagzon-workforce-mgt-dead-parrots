@@ -8,9 +8,13 @@
   <body>
     <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
     <h2>Department: {{ employee.department.dept_name }}</h2>
+    {% if employee.computer.make != None %}
     <p>Computer: {{ employee.computer.make }} </p>
-    {% for tp in employee.training_program %}
-    <p>Training Program: {{ tp.training_program.name }} </p>
+    {% endif %}
+    {% if employee.training_programs != None %}
+    {% for tp in employee.training_programs %}
+    <p>Training Program: {{ tp.name }} </p>
     {% endfor %}
+    {% endif %}
   </body>
 </html>
