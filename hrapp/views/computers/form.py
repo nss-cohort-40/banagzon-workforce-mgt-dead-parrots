@@ -3,29 +3,29 @@ from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from ..connection import Connection
 
-def get_computers():
+
+def get_employees():
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
         select
-          c.id,
-          c.make,
-          c.purchase_date,
-          c.decommission_date
-        from hrapp_computer c
+          e.id,
+          e.first_name,
+          e.last_name
+        from hrapp_employee e
         """)
 
-        return db_cursor.fetchall()
+        return db_cursor.fetchall()  
 
 @login_required
 def computer_form(request):
     if request.method == 'GET':
-        computers = get_computers()
+        employees = get_employees()
         template = 'computers/form.html'
         context = {
-          'all_computers': computers
+          'all_employees': employees
         }
 
         return render(request, template, context)
@@ -44,5 +44,18 @@ def computer_form(request):
             values (?, ?)
             """,
             (form_data['make'], form_data['purchase_date']))
+            
+            computer_id = db_cursor.lastrowid
+            
+            if form_data['employee'] != "NULL":
+
+                db_cursor.execute("""
+                insert into hrapp_employeecomputer
+                (
+                  computer_id, employee_id
+                )
+                values (?, ?)
+                """,
+                (computer_id, form_data['employee']))
             
         return redirect(reverse('hrapp:computer_list'))

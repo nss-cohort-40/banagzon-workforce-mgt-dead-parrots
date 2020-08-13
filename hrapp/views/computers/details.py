@@ -21,14 +21,39 @@ def get_computer(computer_id):
 
         return db_cursor.fetchone()
 
+def get_assigned_computer(computer_id):
+    with sqlite3.connect(Connection.db_path) as conn:
+        conn.row_factory = sqlite3.Row
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        select
+          c.id,
+          c.make,
+          c.purchase_date,
+          c.decommission_date,
+          e.id,
+          e.first_name employee_first,
+          e.last_name employee_last
+        from hrapp_computer c
+        join hrapp_employeecomputer ec on c.id = ec.computer_id
+        join hrapp_employee e on e.id = ec.employee_id
+        where c.id = ?
+        """, (computer_id,))
+
+        return db_cursor.fetchone()
+
 @login_required
 def computer_details(request, computer_id):
     if request.method == 'GET':
+        
+        assigned_computer = get_assigned_computer(computer_id)
         computer = get_computer(computer_id)
 
         template = 'computers/detail.html'
         context = {
-            'computer': computer
+            'computer': computer,
+            'assigned_computer': assigned_computer
         }
 
         return render(request, template, context)
