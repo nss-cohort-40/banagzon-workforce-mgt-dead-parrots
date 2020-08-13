@@ -1,11 +1,5 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Employee</title>
-  </head>
-  <body>
+{% extends 'shared/base.html' %}
+{% block content %}
     <h1>{{ employee.first_name }} {{ employee.last_name }}</h1>
     <h2>Department: {{ employee.department.dept_name }}</h2>
     {% if employee.computer.make != None %}
@@ -20,5 +14,4 @@
     {% if user.is_authenticated %}
     {% comment %} <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button> {% endcomment %}
     {% endif %}
-  </body>
-</html>
+{% endblock %}
