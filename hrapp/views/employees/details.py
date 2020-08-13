@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date
 from django.urls import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -27,6 +28,7 @@ def create_employee(cursor, row):
     computer.make = _row['computer_make']
     computer.id = _row['computer_id']
     employee.computer = computer
+    employee.employeecomputer_id = _row['employeecomputer_id']
 
     employee.training_programs = []
 
@@ -117,42 +119,49 @@ def employee_details(request, employee_id):
     elif request.method == 'POST':
         form_data = request.POST
 
-    if (
+        if (
+                "actual_method" in form_data
+                and form_data["actual_method"] == "PUT"
+            ):
+                with sqlite3.connect(Connection.db_path) as conn:
+                    db_cursor = conn.cursor()
+
+                    db_cursor.execute("""
+                    UPDATE hrapp_employee
+                    SET first_name = ?,
+                        last_name = ?,
+                        department_id = ?
+                    WHERE id = ?
+                    """,
+                    (
+                        form_data['first_name'], form_data['last_name'],
+                        form_data['department'],
+                        employee_id,
+                    ))
+                    db_cursor.execute("""
+                    UPDATE hrapp_employeecomputer
+                    SET unassign_date = ?,
+                    WHERE id = ?
+                    """,
+                    (
+                        date.today(), employee.employeecomputer_id
+                    ))
+
+
+                return redirect(reverse('hrapp:employees'))
+    
+
+        if (
             "actual_method" in form_data
-            and form_data["actual_method"] == "PUT"
+            and form_data["actual_method"] == "DELETE"
         ):
             with sqlite3.connect(Connection.db_path) as conn:
                 db_cursor = conn.cursor()
 
                 db_cursor.execute("""
-                UPDATE hrapp_employee
-                SET first_name = ?,
-                    last_name = ?,
-                    department_id = ?,
-                    computer_id = ?,
-                    location_id = ?
+                DELETE FROM hrapp_employee
                 WHERE id = ?
-                """,
-                (
-                    form_data['first_name'], form_data['last_name'],
-                    form_data['department_id'], form_data['computer_id'],
-                    form_data["location"], employee_id,
-                ))
+                """, (employee_id,))
 
-            return redirect(reverse('libraryapp:books'))
-    
-
-    if (
-        "actual_method" in form_data
-        and form_data["actual_method"] == "DELETE"
-    ):
-        with sqlite3.connect(Connection.db_path) as conn:
-            db_cursor = conn.cursor()
-
-            db_cursor.execute("""
-            DELETE FROM hrapp_employee
-            WHERE id = ?
-            """, (employee_id,))
-
-        return redirect(reverse('hrapp:employee_list'))
+            return redirect(reverse('hrapp:employee_list'))
 

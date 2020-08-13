@@ -16,7 +16,7 @@
       {% csrf_token %}
       <fieldset>
           <label for="first_name">First Name: </label>
-          <input id="first_name" type="text" name="first_name">
+          <input id="first_name" type="text" name="first_name" value="{{ employee.first_name }}">
       </fieldset>
       <fieldset>
           <label for="last_name">Last Name: </label>
@@ -36,7 +36,16 @@
           </select>
       </fieldset>
       {% if employee.id is not None %}
-      <input type="hidden" name="actual_method" value="PUT">
+       <fieldset>
+          <label for="computer">Computers: </label>
+          <select id="computer" type="text" name="computer">
+            {% for computer in computers %}
+            <option value="{{ computer.id }}"> {{ computer.make }} </option>
+            <input type="hidden" value="{{ computer.connection_id }}" name="{{ computer.connection_id }}" />
+            {% endfor %}
+          </select>
+        <fieldset>
+      <input type="hidden" name="actual_method" value="PUT" />
       <input type="submit" value="Update" />
       {% else %}
       <input type="submit" value="Add Employee" />
