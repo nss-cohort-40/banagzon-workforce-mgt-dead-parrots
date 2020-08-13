@@ -11,7 +11,6 @@
     <li>
         <p><a href="{% url 'hrapp:employee' employee.id %}"> {{ employee }}</a></p>
         Department: {{ employee.department.dept_name}}
-        <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button>
     </li>
 {% endfor %}
 </ol>

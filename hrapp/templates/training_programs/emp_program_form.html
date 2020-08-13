@@ -1,19 +1,24 @@
 {% extends 'shared/base.html' %}
 
 {% block content %}
-<form action="{% url 'hrapp:emp_program_form' employee_id %}" method="post">
-  {% csrf_token %}
 
-  <fieldset>
-    <label for="training_program">Training Programs: </label>
-    <select id="training_program" type="text" name="training_program">
-          {% for program in training_programs %}
-              <option value="{{ program.id }}">{{ program.name }}</option>
-          {% endfor %}
-    </select>
-    <input type="hidden" name="actual_method" value="ASSIGN_EMPLOYEE">
-    <input type="submit" value="Create" />
-  </fieldset>
-</form>
+{% if training_programs|length == 0 %}
+  <h3>No training programs are currently open for enrollment!</h3>
+  <p><a href="{% url 'hrapp:employee' employee_id %}"> Go back to details.</a></p>
+{% else %}
+  <form action="{% url 'hrapp:emp_program_form' employee_id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <label for="training_program">Training Programs: </label>
+      <select id="training_program" type="text" name="training_program">
+            {% for program in training_programs %}
+                <option value="{{ program.id }}">{{ program.name }}</option>
+            {% endfor %}
+      </select>
+      <input type="hidden" name="actual_method" value="ASSIGN_EMPLOYEE">
+      <input type="submit" value="Create" />
+    </fieldset>
+  </form>
+{% endif %}
 
 {% endblock content %}

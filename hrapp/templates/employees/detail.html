@@ -12,6 +12,6 @@
     {% endfor %}
     {% endif %}
     {% if user.is_authenticated %}
-    {% comment %} <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button> {% endcomment %}
+    <button><a href="{% url 'hrapp:emp_program_form' employee.id %}">Assign Employee</a></button>
     {% endif %}
 {% endblock %}

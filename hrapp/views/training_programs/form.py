@@ -4,10 +4,12 @@ from django.shortcuts import redirect
 from django.shortcuts import reverse
 from django.contrib.auth.decorators import login_required
 from hrapp.models import Training_program
+from ..employees.details import get_employee
 from .detail import get_training_program
 from ..connection import Connection
 from ...helpers import date_bool
 import datetime
+
 
 @login_required
 def training_program_form(request):
@@ -15,6 +17,7 @@ def training_program_form(request):
     if request.method == 'GET':
         template = 'training_programs/form.html'
         return render(request, template)
+
 
 @login_required
 def training_program_edit_form(request, training_program_id):
@@ -31,6 +34,7 @@ def training_program_edit_form(request, training_program_id):
             return render(request, template, context)
 
         return redirect(reverse('hrapp:training_programs'))
+
 
 def employee_program_form(request, employee_id):
         if request.method == 'GET':
@@ -62,12 +66,10 @@ def employee_program_form(request, employee_id):
                         all_programs[row['name']] = list()
                     all_programs[row['name']].append(row)
                         
-
                 for program in all_programs:
                     if program not in currently_enrolled and len(all_programs[program]) < all_programs[program][0]['max_attendees']:
                         capable_of_enrolling.append(all_programs[program][0])
 
-                
                 template = 'training_programs/emp_program_form.html'
                 context = {
                     'training_programs': capable_of_enrolling,
@@ -90,7 +92,15 @@ def employee_program_form(request, employee_id):
                 """,
                 (employee_id, form_data['training_program']))
 
-            return redirect(reverse('hrapp:employee_list'))
+            employee = get_employee(employee_id)
+            template = 'employees/detail.html'
+        
+            context = {
+                'employee': employee
+            }
+
+            return render(request, template, context)
+
 
 def create_programs_emp_not_in(cursor, row):
     _row = sqlite3.Row(cursor, row)

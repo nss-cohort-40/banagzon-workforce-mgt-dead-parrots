@@ -7,6 +7,7 @@ from .form import training_program_form
 from ..connection import Connection
 import datetime
 
+
 def training_program_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:

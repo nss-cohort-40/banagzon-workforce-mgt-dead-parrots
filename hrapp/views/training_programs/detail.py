@@ -7,6 +7,7 @@ from hrapp.models import Employee
 from ..connection import Connection
 from ...helpers import date_bool
 
+
 def get_employees_attending(training_program_id):
     with sqlite3.connect(Connection.db_path) as conn:
         conn.row_factory = sqlite3.Row
@@ -25,6 +26,7 @@ def get_employees_attending(training_program_id):
         """, (training_program_id,))
         
         return db_cursor.fetchall()
+
 
 def get_training_program(training_program_id):
     with sqlite3.connect(Connection.db_path) as conn:
@@ -100,6 +102,7 @@ def training_program_details(request, training_program_id):
                 """, (training_program_id,))
 
             return redirect(reverse('hrapp:training_programs'))
+
 
 def employee_training_program_details(request, training_program_id, employee_id):
     form_data = request.POST
