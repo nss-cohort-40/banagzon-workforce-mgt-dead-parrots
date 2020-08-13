@@ -12,8 +12,9 @@
     <p>Computer: {{ employee.computer.make }} </p>
     {% endif %}
     {% if employee.training_programs != None %}
+    <h2> Training Programs</h2>
     {% for tp in employee.training_programs %}
-    <p>Training Program: {{ tp.name }} </p>
+    <p>{{ tp.name }} </p>
     {% endfor %}
     {% endif %}
     {% if user.is_authenticated %}
