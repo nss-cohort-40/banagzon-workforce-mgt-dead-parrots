@@ -36,8 +36,12 @@
           </select>
       </fieldset>
       {% if employee.id is not None %}
+      <input type="hidden" name="actual_method" value="PUT">
+      <input type="submit" value="Update" />
+      {% else %}
       <input type="submit" value="Add Employee" />
-      
+      {% endif %}  
     </form>
   </body>
+  
 </html>

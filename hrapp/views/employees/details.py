@@ -130,3 +130,4 @@ def employee_details(request, employee_id):
             """, (employee_id,))
 
         return redirect(reverse('hrapp:employee_list'))
+
