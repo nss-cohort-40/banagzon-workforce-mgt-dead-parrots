@@ -12,35 +12,41 @@ body {
 /* Nav */
 .nav {
   display: flex;
-  margin: 1% 0 0 0;
 }
 
 .nav__logo {
   flex-grow: 1;
-  display: block;
   background: url(media/bangazon_logo.svg);
-  width: 150px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
+  margin: 1% 0 1% 6%;
   background-size: contain;
   background-repeat: no-repeat;
-  margin: 2% 0 2% 2%;
 }
 
 .nav__links {
-  flex-grow: 5;
-  justify-content: space-around;
-  align-items: flex-end;
-  margin: 0 0 1% 0;
+  flex-grow: 3;
+  justify-content: left;
+  align-items: center;
   padding: 0;
+  display: flex;
+  list-style: none;
+}
+.nav__links a {
+  text-decoration: none;
+}
+.nav__links a:hover {
+  border-bottom: .1em solid blue;
+  text-decoration: none;
+}
+.nav__links a:visited {
+  color: inherit;
+
 }
 
 .nav__link {
-  font-size: 16pt;
-  font-weight: 300;
-  letter-spacing: 1px;
-}
-.nav__link, a:visited {
-  color: inherit;
+  padding-right: 6%;
+  font-size: large;
 }
 .nav__blob {
   position: fixed;
