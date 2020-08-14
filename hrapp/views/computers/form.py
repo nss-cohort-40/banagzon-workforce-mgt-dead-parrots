@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from ..connection import Connection
@@ -11,10 +12,14 @@ def get_employees():
 
         db_cursor.execute("""
         select
-          e.id,
-          e.first_name,
-          e.last_name
+            e.id,
+            e.last_name,
+            e.first_name,
+            ec.id empcomp_id,
+            ec.computer_id,
+            ec.employee_id
         from hrapp_employee e
+        left join hrapp_employeecomputer ec on ec.employee_id = e.id;
         """)
 
         return db_cursor.fetchall()  
@@ -25,7 +30,7 @@ def computer_form(request):
         employees = get_employees()
         template = 'computers/form.html'
         context = {
-          'all_employees': employees
+          'all_employees': employees,
         }
 
         return render(request, template, context)
@@ -52,10 +57,10 @@ def computer_form(request):
                 db_cursor.execute("""
                 insert into hrapp_employeecomputer
                 (
-                  computer_id, employee_id
+                  computer_id, employee_id, assign_date
                 )
-                values (?, ?)
+                values (?, ?, ?)
                 """,
-                (computer_id, form_data['employee']))
+                (computer_id, form_data['employee'], date.today()))
             
         return redirect(reverse('hrapp:computer_list'))

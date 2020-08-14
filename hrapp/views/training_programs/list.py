@@ -7,6 +7,7 @@ from .form import training_program_form
 from ..connection import Connection
 import datetime
 
+
 def training_program_list(request):
     if request.method == 'GET':
         with sqlite3.connect(Connection.db_path) as conn:
@@ -53,13 +54,15 @@ def training_program_list(request):
         form_data = request.POST
 
         with sqlite3.connect(Connection.db_path) as conn:
-            db_cursor = conn.cursor()
-            db_cursor.execute("""
-            INSERT INTO hrapp_training_program
-            (
-              name, description, start_date, end_date, max_attendees
-            )
-            VALUES (?, ?, ?, ?, ?)
-            """, (form_data['name'], form_data['description'], form_data['start_date'], form_data['end_date'], form_data['max_attendees']))
+              db_cursor = conn.cursor()
+              db_cursor.execute("""
+              INSERT INTO hrapp_training_program
+              (
+                name, description, start_date, end_date, max_attendees
+              )
+              VALUES (?, ?, ?, ?, ?)
+              """, (form_data['name'], form_data['description'], form_data['start_date'], form_data['end_date'], form_data['max_attendees']))
 
         return redirect(reverse('hrapp:training_programs'))
+
+        
