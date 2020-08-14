@@ -4,12 +4,12 @@ from django.shortcuts import redirect
 from django.shortcuts import reverse
 from django.contrib.auth.decorators import login_required
 from hrapp.models import Training_program
+from hrapp.models import Employee
 from ..employees.details import get_employee
 from .detail import get_training_program
 from ..connection import Connection
 from ...helpers import date_bool
 import datetime
-
 
 @login_required
 def training_program_form(request):
@@ -17,7 +17,6 @@ def training_program_form(request):
     if request.method == 'GET':
         template = 'training_programs/form.html'
         return render(request, template)
-
 
 @login_required
 def training_program_edit_form(request, training_program_id):
@@ -35,11 +34,10 @@ def training_program_edit_form(request, training_program_id):
 
         return redirect(reverse('hrapp:training_programs'))
 
-
 def employee_program_form(request, employee_id):
         if request.method == 'GET':
             with sqlite3.connect(Connection.db_path) as conn:
-                conn.row_factory = sqlite3.Row
+                conn.row_factory = create_training_programs
                 current_date = datetime.date.today()
                 db_cursor = conn.cursor()
 
@@ -55,21 +53,8 @@ def employee_program_form(request, employee_id):
                 """, (current_date,))
 
                 dataset = db_cursor.fetchall()
-                all_programs = {}
-                currently_enrolled = []
-                capable_of_enrolling = []
-
-                for row in dataset:
-                    if row['employee_id'] == employee_id:
-                        currently_enrolled.append(row['name'])
-                    if row['name'] not in all_programs:
-                        all_programs[row['name']] = list()
-                    all_programs[row['name']].append(row)
-                        
-                for program in all_programs:
-                    if program not in currently_enrolled and len(all_programs[program]) < all_programs[program][0]['max_attendees']:
-                        capable_of_enrolling.append(all_programs[program][0])
-
+                capable_of_enrolling = sort_assigned_programs(employee_id, dataset)
+                
                 template = 'training_programs/emp_program_form.html'
                 context = {
                     'training_programs': capable_of_enrolling,
@@ -100,3 +85,35 @@ def employee_program_form(request, employee_id):
             }
 
             return render(request, template, context)
+
+def create_training_programs(cursor, row):
+    _row = sqlite3.Row(cursor, row)
+
+    training_program = Training_program()
+    training_program.id = _row["id"]
+    training_program.name = _row["name"]
+    training_program.max_attendees = _row["max_attendees"]
+
+    employee = Employee()
+    employee.id = _row['employee_id']
+
+    return (training_program, employee,)
+
+def sort_assigned_programs(employee_id, dataset):
+    all_programs = {}
+    currently_enrolled = []
+    capable_of_enrolling = []
+
+    for (training_program, employee) in dataset:
+        if training_program.name not in all_programs:
+            all_programs[training_program.name] = list()
+        if employee.id == employee_id:
+            currently_enrolled.append(training_program.name)
+        else:
+            all_programs[training_program.name].append(training_program)
+
+    for key, value in all_programs.items():
+        if key not in currently_enrolled and len(value) < value[0].max_attendees:
+            capable_of_enrolling.append({'name': key, 'id': value[0].id})
+
+    return capable_of_enrolling
