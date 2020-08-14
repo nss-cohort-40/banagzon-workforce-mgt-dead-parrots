@@ -144,7 +144,17 @@ def employee_details(request, employee_id):
                     WHERE id = ?
                     """,
                     (
-                        date.today(), employee.employeecomputer_id
+                        date.today(), employee.employeecomputer_id,
+                    ))
+                    db_cursor.execute("""
+                    UPDATE hrapp_employeecomputer
+                    SET employee_id = ?,
+                        computer_id = ?,
+                        assign_date = ?
+                    WHERE id = ?
+                    """,
+                    (
+                        employee_id, computer_id, 
                     ))
 
 
