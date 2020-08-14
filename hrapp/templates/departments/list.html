@@ -18,6 +18,8 @@
             <p>Budget ${{ department.budget }}</p>
             {% if department.employees.0.first_name %}
             <p>Number of employees: {{ department.employees|length }}</p>
+            {% else %}
+            <p>Number of employees: 0</p>
             {% endif %}
         </li>
     {% endfor %}
