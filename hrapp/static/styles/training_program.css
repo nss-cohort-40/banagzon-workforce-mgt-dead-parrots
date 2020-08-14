@@ -1,0 +1,10 @@
+/* Training program styling */
+
+.employee_training_program {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .employee_training_program form button {
+    margin-left: 6px;
+  }
