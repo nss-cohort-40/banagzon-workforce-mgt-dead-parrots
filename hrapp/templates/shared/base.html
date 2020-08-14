@@ -17,22 +17,20 @@
         <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="nav__blob">
             <path fill="#9EF0F0" d="M52.3,-50.8C67.4,-37.2,78.9,-18.6,80.9,2C82.9,22.6,75.3,45.2,60.2,53.2C45.2,61.2,22.6,54.7,1.8,52.9C-19,51.1,-38,54,-44.7,46C-51.4,38,-45.9,19,-48,-2.1C-50.1,-23.3,-59.9,-46.5,-53.2,-60.1C-46.5,-73.6,-23.3,-77.4,-2.3,-75.1C18.6,-72.8,37.2,-64.3,52.3,-50.8Z" transform="translate(100 100)" />
         </svg>
+        <a href="/" class="nav__logo"></a>
         <ul class="nav__links">
-            <li>
-            <a href="/" class="nav__logo"></a>
-            </li>
             <li class="nav__link"><a href="{% url 'hrapp:employee_list' %}">Employees</a></li>
             <li class="nav__link"><a href="{% url 'hrapp:department_list' %}">Departments</a></li>    
             <li class="nav__link"><a href="{% url 'hrapp:computer_list' %}">Computers</a></li>    
             <li class="nav__link"><a href="{% url 'hrapp:training_programs' %}">Training Programs</a></li>   
             {% if not user.is_authenticated %}
-            <li class="nav__link"><a href="{% url 'hrapp:login' %}">Login</a> 
+            <li class="nav__link--login"><a href="{% url 'hrapp:login' %}">Login</a> 
             {% else %}
             <li class="nav__link nav__link--logout"><a href="{% url 'hrapp:logout' %}">Logout</a></li>    
             {% endif %}
         </ul>
     </nav>
-    <hr class="line">
+    {% comment %} <hr class="line"> {% endcomment %}
     {% block content %}
     {% endblock %}
     {% block scripts %}
