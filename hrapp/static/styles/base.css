@@ -1,3 +1,7 @@
+@import "home.css";
+@import "computers.css";
+@import "training_program.css";
+
 body {
   margin: 0;
   padding: 0;
@@ -53,45 +57,4 @@ body {
   border: 5px solid #ffc1f354;
   padding: 0;
   margin: 0;
-}
-
-/* computer styles */
-
-.computer_header {
-  text-align: center;
-}
-
-.computers {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-.computer {
-  flex-basis: 20%;
-  padding: 0 2em 0.5em 2em;
-  border: 1px solid gray;
-  margin: 1em;
-  padding: 1.5em;
-}
-ul {
-  list-style-type: none;
-  display: flex;
-  justify-content: space-around;
-}
-
-a {
-  text-decoration: none;
-}
-
-/* Training program styling */
-
-.employee_training_program {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.employee_training_program form button {
-  margin-left: 6px;
 }
