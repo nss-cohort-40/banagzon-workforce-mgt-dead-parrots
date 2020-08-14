@@ -2,6 +2,7 @@ import sqlite3
 from django.urls import reverse
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 from hrapp.models import Training_program
 from hrapp.models import Employee
 from ..connection import Connection
@@ -47,7 +48,7 @@ def get_training_program(training_program_id):
 
         return db_cursor.fetchone()
 
-
+@login_required
 def training_program_details(request, training_program_id):
     if request.method == 'GET':
         training_program = get_training_program(training_program_id)
@@ -103,7 +104,7 @@ def training_program_details(request, training_program_id):
 
             return redirect(reverse('hrapp:training_programs'))
 
-
+@login_required
 def employee_training_program_details(request, training_program_id, employee_id):
     form_data = request.POST
     if (
