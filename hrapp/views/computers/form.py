@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import date
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from ..connection import Connection
@@ -56,10 +57,10 @@ def computer_form(request):
                 db_cursor.execute("""
                 insert into hrapp_employeecomputer
                 (
-                  computer_id, employee_id
+                  computer_id, employee_id, assign_date
                 )
-                values (?, ?)
+                values (?, ?, ?)
                 """,
-                (computer_id, form_data['employee']))
+                (computer_id, form_data['employee'], date.today()))
             
         return redirect(reverse('hrapp:computer_list'))
