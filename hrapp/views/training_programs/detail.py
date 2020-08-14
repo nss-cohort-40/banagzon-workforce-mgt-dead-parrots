@@ -116,8 +116,9 @@ def employee_training_program_details(request, training_program_id, employee_id)
 
                 db_cursor.execute("""
                 DELETE FROM hrapp_employee_training_program
-                WHERE employee_id = ?
-                """, (employee_id,))
+                WHERE training_program_id = ?
+                AND employee_id = ?
+                """, (training_program_id, employee_id,))
 
             training_program = get_training_program(training_program_id)
             program_employees = get_employees_attending(training_program_id)
